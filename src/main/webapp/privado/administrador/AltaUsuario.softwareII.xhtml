@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+
+    <h:outputStylesheet library="css" name="registro.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    <h:outputScript library="js" name="calendar_es.js" />
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+                <div class="card" style="background: url('./../../resources/img/fondo.jpeg');">
+                    <div class="card" align="center">
+                        <h1 align="center" style="color:white; margin-top: 10px; padding-top: 10px">
+                            Nuevo Usuario.
+                        </h1>
+                    </div>
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+
+
+                    <p:fieldset legend="Datos Personales" toggleable="true" style="width: 600px; margin-left: 370px;">
+                        <h:panelGrid id="pgPersonales" columns="3" styleClass="ui-noborder" cellpadding="3" >                   
+                            <p:outputLabel for="txtNombre" value="Nombre:"/>
+                                <p:inputText type="text" id="txtNombre"
+                                        value="#{altaUsuarioController.persona.nombre}" 
+                                        required="true" 
+                                        requiredMessage="Nombre es un campo obligatorio"
+                                        placeholder=""
+                                />
+                                <br> </br>
+                            <p:outputLabel for="txtApellidos" value="Apellidos:"/>
+                                <p:inputText type="text" value="#{altaUsuarioController.persona.apellidos}" required="true"
+                             requiredMessage="Apellidos es un campo obligatorio"
+                             placeholder=""
+                             id="txtApellidos"/>
+                                <br/>
+                                
+                            <p:outputLabel for="txtFecha" value="Fecha de Nacimiento:"/>
+                                <p:calendar value="#{altaUsuarioController.persona.fechaNacimiento}" locale="es" navigator="true"
+                                    pattern="yyyy-MMM-dd" required="true" effect="explode"
+                                    requiredMessage="Fecha de Nacimiento es un campo obligatorio"
+                                    id="txtFecha"/>
+                            <br/>
+                            
+                            <p:outputLabel for="txtNumTarj" value="Numero de Tarjeta:"/>
+                                <p:inputMask value="#{altaUsuarioController.numTarjSt}" mask="9999 9999 9999 9999" required="true"
+                                    requiredMessage="Numero de Tarjeta es un campo obligatorio"
+                                    id="txtNumTarj" placeholder="">
+                                    
+                                </p:inputMask>
+                            <br/>
+                            
+                            <p:outputLabel for="txtDni" value="DNI:"/>
+                                <p:inputText type="text" value="#{altaUsuarioController.persona.DNI}" required="true"
+                                    requiredMessage="DNI es un campo obligatorio"
+                                    id="txtDni" placeholder=""/>
+                            <br/>
+                            
+                            <p:outputLabel for="txtTelefono" value="Introduce tu Telefono:"/>
+                                <p:inputMask placeholder="" value="#{altaUsuarioController.telfSt}" mask="999 999 999" required="true"
+                                    requiredMessage="Telefono es un campo obligatorio"
+                                    id="txtTelefono">
+                           
+                                </p:inputMask>                        
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                    <p:fieldset legend="Datos de Acceso" toggleable="true" style="margin-top: 30px;  width: 600px; margin-left: 370px;" >
+                        <h:panelGrid id="pgAcceso" columns="3" styleClass="ui-noborder" cellpadding="3"> 
+
+                            <p:outputLabel for="txtUserName" value="Nombre de usuario:"/>
+                                <p:inputText type="text" value="#{altaUsuarioController.usuario.user}" required="true"
+                                    requiredMessage="Nombre de Usuario es un campo obligatorio"
+                                    placeholder=""
+                                    id="txtUserName"/>
+
+                            <br/>
+                            <p:outputLabel for="txtCorreo" value="Correo Electronico:"/>
+                                <p:inputText id="txtCorreo" value="#{altaUsuarioController.usuario.correo}" required="true" 
+                                    requiredMessage="Correo Electronico es un campo obligatorio"
+                                    placeholder=""> 
+                                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" /> 
+                                </p:inputText>
+                            <br/>
+                            
+                            <p:outputLabel for="@next" value="Rol:"/>
+                                <p:selectOneMenu style="outline: transparent; border:none; background: white; color:black " id="rol" 
+                                    value="#{altaUsuarioController.rol.tipoUsuario}" label="Seleccione un Rol">
+                                    <f:selectItem itemLabel="Seleccione un Rol" itemValue=""/>
+                                    <f:selectItems value="#{altaUsuarioController.listaNomRoles}"/>
+                                </p:selectOneMenu>
+                            <br/>
+                            
+                            <p:outputLabel for="txtPassw" value="Password:"></p:outputLabel>
+                                <p:password value="#{altaUsuarioController.usuario.password}" match="txtPassw2" required="true"
+                                    requiredMessage="Password es un campo obligatorio"
+                                    placeholder=""
+                                    id="txtPassw"/>
+                            <br/>
+                            
+                            <p:outputLabel for="txtPassw2" value="Repita la Password:"/>
+                                <p:password value="#{altaUsuarioController.usuario.password}" required="true"
+                                    requiredMessage="Repetir la Password es un campo obligatorio"
+                                    placeholder=""
+                                    id="txtPassw2"/>
+                            <br/>
+                            
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                    value="Registrar" 
+                                    update="@form"
+                                    action="#{altaUsuarioController.registraAdmin}"
+                                    icon="pi pi-sign-in"
+                            >
+                    
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                </h:form> 
+                </div>
+       
+                <h:outputScript library="js" name="spanishLocale.js" />
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>

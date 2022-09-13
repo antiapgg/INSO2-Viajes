@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    
+    <h:outputStylesheet library="css" name="registro.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    <h:outputScript library="js" name="calendar_es.js" />
+    
+    <h:head>
+        <title>MODIFICAR GRUPOS.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+                <div class="p-grid" style="margin-top: 10px; margin-bottom: 20px; height: 600px; background: url('./../../resources/img/fondo.jpeg');">
+                    <h1 align="center" style="color:white; margin-top: 10px; padding-top: 10px">
+                        Modificar Destino.
+                    </h1>
+                    <div class="p-col-12 p-md-6 p-lg-5"  align="center">
+                        <h:form id="form">
+                            <div class="card">
+                                <p:fieldset legend="Informacion" toggleable="true" style="width: 600px;">
+                                    <h:panelGrid columns="3" rendered="#{showDestinoController.destino != null}">
+                                        <h:outputText value="Nombre:               " />
+                                        <h:outputText value="#{showDestinoController.destino.nombre}" id="txtNombreD"  style="margin-left: 50px; width:200px"/>
+                                         <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                            font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                            value="Editar" 
+                                            update="@form"
+                                            oncomplete="PF('wdialogoNombre').show();"
+                                            icon="pi pi-check"
+                                        />
+                                         
+                                        <h:outputText value="Pais:               " />
+                                        <h:outputText value="#{showDestinoController.destino.pais}" id="txtPaisD"  style="margin-left: 50px; width:200px"/>
+                                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                            font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                            value="Editar" 
+                                            update="@form"
+                                            oncomplete="PF('wdialogoPais').show();"
+                                            icon="pi pi-check"
+                                        />
+                                        
+                                        <h:outputText value="Precio:               " />
+                                        <h:outputText value="#{showDestinoController.destino.precio}" id="txtPrecioD"  style="margin-left: 50px; width:200px"/>
+                                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                            font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                            value="Editar" 
+                                            update="@form"
+                                            oncomplete="PF('wdialogoPrecio').show();"
+                                            icon="pi pi-check"
+                                        />
+                                        
+                                        <h:outputText value="Zona:               " />
+                                        <h:outputText value="#{showDestinoController.destino.zona.nombre}" id="txtZonaD"  style="margin-left: 50px; width:200px"/>
+                                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                            font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                            value="Editar" 
+                                            update="@form"
+                                            oncomplete="PF('wdialogozona').show();"
+                                            icon="pi pi-check"
+                                        />
+                                        
+                                        <h:outputText value="Tipo de Viaje:       " />
+                                        <h:outputText value="#{showDestinoController.destino.tipoViaje.nombre}" id="txtTipoViajeD"  style="margin-left: 50px; width:200px"/>
+                                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                            font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                            value="Editar" 
+                                            update="@form"
+                                            oncomplete="PF('wdialogoTipo').show();"
+                                            icon="pi pi-check"
+                                        />                 
+                                        
+                                        <h:outputText value="Grupos Recomendados:       " />
+                                        <h:outputText value="#{showDestinoController.destino.grupos.nombre}" id="txtGruposD"  style="margin-left: 50px; width:200px"/>
+                                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                            font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                            value="Editar" 
+                                            update="@form"
+                                            oncomplete="PF('wdialogoGrupos').show();"
+                                            icon="pi pi-check"
+                                        />
+
+                                    </h:panelGrid>  
+                                </p:fieldset>
+                            </div>
+                        </h:form>
+                    </div>
+                    <p:dialog id='dialogo' widgetVar='wdialogoZona' header="Mostrar Numero Minimo " modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                        <h:form>
+                            <p:outputLabel for="txtZonaD" value="Zona:"/>
+                            <p:selectOneMenu style="outline: transparent; border:none; background: white; color: black " id="txtZonaD" 
+                                             value="#{showDestinoController.zonaNom}" label="Seleccione una Zona">
+                                <f:selectItem itemLabel="Seleccione una Zona" itemValue=""/>
+                                <f:selectItems value="#{showDestinoController.listaNomZon}"/>
+                            </p:selectOneMenu>
+                             <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Guardar" 
+                                    action="#{showDestinoController.editaZona()}"
+                                    oncomplete="PF('wdialogoZona').hide();"
+                                    update='form'
+                                    icon="pi pi-check"
+                                />
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog id='dialogo1' widgetVar='wdialogoTipo' header="Tipo de Viaje" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                        <h:form>
+                            <p:outputLabel for="txtTipoViajeD" value="Tipo de Viaje:"/>
+                            <p:selectOneMenu style="outline: transparent; border:none; background: white; color: black " id="txtTipoViajeD" 
+                                             value="#{showDestinoController.tipoNom}" label="Seleccione un Tipo">
+                                <f:selectItem itemLabel="Seleccione un Tipo de Viaje" itemValue=""/>
+                                <f:selectItems value="#{showDestinoController.listaNomTip}"/>
+                            </p:selectOneMenu>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Guardar" 
+                                    action="#{showDestinoController.editaTipo()}"
+                                    oncomplete="PF('wdialogoTipo').hide();"
+                                    update='form'
+                                    icon="pi pi-check"
+                                />
+                        </h:form>
+
+                    </p:dialog>
+                    
+                    <p:dialog id='dialogo9' widgetVar='wdialogoGrupos' header="Grupos: " modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                        <h:form>
+                            <p:outputLabel for="txtGruposD" value="Grupos:"/>
+                            <p:selectOneMenu style="outline: transparent; border:none; background: white; color: black " id="txtGruposD" 
+                                             value="#{showDestinoController.grupoNom}" label="Seleccione un Grupo">
+                                <f:selectItem itemLabel="Seleccione un Grupo" itemValue=""/>
+                                <f:selectItems value="#{showDestinoController.listaNomGr}"/>
+                            </p:selectOneMenu>
+                             <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Guardar" 
+                                    action="#{showDestinoController.editaGrupo()}"
+                                    oncomplete="PF('wdialogoGrupos').hide();"
+                                    update='form'
+                                    icon="pi pi-check"
+                                />
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog id='dialogo2' widgetVar='wdialogoNombre' header="Nombre:" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                        <h:form>
+                            <p:outputLabel for="txtNombreD" value="Nombre: "/>
+                            <p:inputMask value="#{showDestinoController.destino.nombre}" required="true"
+                                         requiredMessage="Nombre es un campo obligatorio"
+                                         id="txtNombreD" placeholder="Introduce el nombre del destino">
+                            </p:inputMask>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Guardar" 
+                                    action="#{showDestinoController.edita()}"
+                                    oncomplete="PF('wdialogoNombre').hide();"
+                                    update='form'
+                                    icon="pi pi-check"
+                                />
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog id='dialogo3' widgetVar='wdialogoPrecio' header="Precio: " modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                        <h:form>
+                            <p:outputLabel for="txtPrecioD" value="Precio "/>
+                             <p:inputMask value="#{showDestinoController.destino.precio}" required="true"
+                                         requiredMessage="Precio es un campo obligatorio"
+                                         id="txtPrecioD" placeholder="Introduce el precio del destino">
+                            </p:inputMask>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Guardar" 
+                                    action="#{showDestinoController.edita()}"
+                                    oncomplete="PF('wdialogoPrecio').hide();"
+                                    update='form'
+                                    icon="pi pi-check"
+                                />
+                        </h:form>
+                    </p:dialog>
+                    
+                    <p:dialog id='dialogo4' widgetVar='wdialogoPais' header="Pais:" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                        <h:form>
+                            <p:outputLabel for="txtPaisD" value="Pais: "/>
+                            <p:inputMask value="#{showDestinoController.destino.pais}" required="true"
+                                         requiredMessage="Pais es un campo obligatorio"
+                                         id="txtPaisD" placeholder="Introduce el nombre del pais">
+                            </p:inputMask>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Guardar" 
+                                    action="#{showDestinoController.edita()}"
+                                    oncomplete="PF('wdialogoPais').hide();"
+                                    update='form'
+                                    icon="pi pi-check"
+                                />
+                        </h:form>
+                    </p:dialog>
+                    <h:outputScript library="js" name="spanishLocale.js" />
+                    
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

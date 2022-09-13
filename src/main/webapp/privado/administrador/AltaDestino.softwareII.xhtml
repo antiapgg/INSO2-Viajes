@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+
+    <h:outputStylesheet library="css" name="registro.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    <h:outputScript library="js" name="calendar_es.js" />
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+                <div class="p-grid" style="margin-top: 10px; margin-bottom: 20px; height: 600px; background: url('./../../resources/img/fondo.jpeg');">
+                    <div class="p-col-12 p-md-6 p-lg-5"  align="center">
+                        <h1 align="center" style="color:white; margin-top: 10px; padding-top: 10px">
+                            Registrar Nuevo Destino.
+                        </h1>
+                    </div>
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+
+
+                    <p:fieldset legend="Datos de Destino" toggleable="true" style="width: 600px; margin-left: 370px;">
+                        <h:panelGrid id="pgPersonales" columns="3" styleClass="ui-noborder" cellpadding="3" >                   
+                            <p:outputLabel for="txtNombre" value="Nombre:"/>
+                                <p:inputText type="text" id="txtNombre"
+                                             value="#{destinoController.destino.nombre}" 
+                                        required="true" 
+                                        requiredMessage="Nombre es un campo obligatorio"
+                                        placeholder="" style="display: block; color: black;"
+                                />
+                                <br> </br>
+                            <p:outputLabel for="txtApellidos" value="Pais:"/>
+                            <p:inputText type="text" value="#{destinoController.destino.pais}" required="true"
+                                    requiredMessage="Pais es un campo obligatorio"
+                                    placeholder=""
+                                    id="txtApellidos"/>
+                                <br/>
+                            <p:outputLabel for="txtDni" value="Precio:"/>
+                                <p:inputText type="text" value="#{destinoController.destino.precio}" required="true"
+                                    requiredMessage="Precio es un campo obligatorio"
+                                    id="txtDni" placeholder=""/>
+                            <br/>
+                            <p:outputLabel for="txtUrl" value="url"/>
+                                <p:inputText type="text" value="#{destinoController.destino.url}" required="true"
+                                    requiredMessage="Precio es un campo obligatorio"
+                                    id="txtUrl" placeholder=""/>
+                            <br/>
+                            
+                            <p:outputLabel for="@next" value="Zona"/>
+                            <p:selectOneMenu style="outline: transparent; border:none; background: white; color: black " id="zona" 
+                                             value="#{destinoController.zonaNom}" label="Seleccione una Zona">
+                                <f:selectItem itemLabel="Seleccione una Zona" itemValue=""/>
+                                <f:selectItems value="#{destinoController.listaNomZon}"/>
+                            </p:selectOneMenu>
+                            <br/>
+                            <p:outputLabel for="@next" value="Grupos"/>
+                            <p:selectOneMenu style="outline: transparent; border:none; background: white; color: black " id="grupo" 
+                                             value="#{destinoController.grupoNom}" label="Seleccione un Grupo">
+                                <f:selectItem itemLabel="Seleccione un Grupo" itemValue=""/>
+                                <f:selectItems value="#{destinoController.listaNomGr}"/>
+                            </p:selectOneMenu>
+                            <br/>
+                            <p:outputLabel for="@next" value="TipoViaje"/>
+                            <p:selectOneMenu style="outline: transparent; border:none; background: white; color: black " id="tipo" 
+                                             value="#{destinoController.tipoNom}" label="Seleccione un Tipo">
+                                <f:selectItem itemLabel="Seleccione un Tipo de Viaje" itemValue=""/>
+                                <f:selectItems value="#{destinoController.listaNomTip}"/>
+                            </p:selectOneMenu>
+                            <br></br>
+                            
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Registrar" 
+                                action="#{destinoController.registra}"
+                                oncomplete="PF('wdialogoUser').show()"
+                                icon="pi pi-sign-in"
+                            />
+                            
+                            <br/>                     
+                                                        
+                                           
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                </h:form> 
+                </div>
+                <br/>
+                <br/>
+                <p:dialog id='dialogo5' widgetVar='wdialogoUser' header="Registro Completado" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="grid5" columns="3" styleClass="ui-noborder" cellpadding="3">
+                            <p:outputLabel value="El Destino se ha registrado con éxito."/>
+ 
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="¡Perfecto!" 
+                                action="#{destinoController.goVerDestino()}"
+                                oncomplete="PF('wdialogoUser').hide();"
+                                update="form"
+                                icon="pi pi-check"
+                            />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>

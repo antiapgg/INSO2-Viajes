@@ -1,0 +1,232 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url(../img/fondo.jpeg) no-repeat center top;
+  background-size: cover;
+  font-family: sans-serif;
+  height: 100vh;
+}
+
+.img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    top: 30px;
+    left: calc(50% - 50px);
+}
+
+.registro-box {
+  width: 320px;
+  height: 625px;
+  background: #000;
+  color: #fff;
+  top: 55%;
+  left: 35%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 30px 30px;
+}
+
+.registro-box .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+}
+
+.registro-box h1 {
+  margin: 0;
+  padding: 0 0 5px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.registro-box label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+}
+
+.registro-box label [type="text"]{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+  color: #000;
+  height: 40px;
+}
+
+.registro-box input {
+  width: 100%;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.registro-box input[type="text"], .registro-box input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.registro-box input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #5BDCF3;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.registro-box input[type="submit"]:hover {
+  cursor: pointer;
+  background: #CCF575;
+  color: #000;
+}
+
+.registro-box a {
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 20px;
+  color: darkgrey;
+}
+
+.registro-box a:hover {
+  color: #fff;
+}
+
+.registro2-box {
+  width: 320px;
+  height: 625px;
+  background: #000;
+  color: #fff;
+  top: 55%;
+  left: 65%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 30px 30px;
+}
+.registro2-box h1 {
+  margin: 0;
+  padding: 0 0 5px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.registro2-box label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+}
+
+.registro2-box label [type="text"]{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+  color: #000;
+  height: 40px;
+}
+
+.registro2-box input {
+  width: 100%;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.registro2-box input[type="text"], .registro2-box input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.registro2-box input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #5BDCF3;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.registro2-box input[type="submit"]:hover {
+  cursor: pointer;
+  background: #CCF575;
+  color: #000;
+}
+
+.registro2-box commandButton {
+  width: 100%;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.registro2-box commandButton[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #5BDCF3;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.registro2-box commandButton[type="submit"]:hover {
+  cursor: pointer;
+  background: #CCF575;
+  color: #000;
+}
+
+.registro2-box a {
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 20px;
+  color: darkgrey;
+}
+
+.registro2-box a:hover {
+  color: #fff;
+}
+
+#comprador{
+    background: #000;
+    margin: 100px auto;
+    width: 40%;
+    text-align: center;
+}
+
+#comprador input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #5BDCF3;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+#comprador input[type="submit"]:hover {
+  cursor: pointer;
+  background: #CCF575;
+  color: #000;
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <h:head>
+        <title>MOSTRAR.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+            <div class="card" style="background: url('./../../resources/img/fondo.jpeg');">
+             <h:form id="salirF">
+                <div align="center">
+                    <p:graphicImage url="#{viajeController.viaje.destino.url}" width="600" height="300" alt="descripcion" />
+                </div>
+                <div align="center">
+                    <p:fieldset legend="Informacion de Tu Viaje" toggleable="true" style="width: 600px;">
+                        <h:panelGrid columns="2" rendered="#{viajeController.viaje != null}">
+                            <h:outputText value="Nombre de tu viaje:               " />
+                            <h:outputText value="#{viajeController.viaje.nombre}" id="txtNombreD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Nombre del viajero:               " />
+                            <h:outputText value="#{viajeController.viaje.persona.nombre}" id="txtPaisD2"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Apellidos del viajero:               " />
+                            <h:outputText value="#{viajeController.viaje.persona.apellidos}" id="txtPais3D"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="DNI del viajero:               " />
+                            <h:outputText value="#{viajeController.viaje.persona.DNI}" id="txtPaisD"  style="margin-left: 50px; width:200px"/>
+                            
+                            <h:outputText value="Destino:               " />
+                            <h:outputText value="#{viajeController.viaje.destino.nombre}" id="txtPrecioD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Pais       " />
+                            <h:outputText value="#{viajeController.viaje.destino.pais}" id="txtActividadedsD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Zona:       " />
+                            <h:outputText value="#{viajeController.viaje.destino.zona.nombre}" id="txtGrupdosD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Fecha Inicio:               " />
+                            <h:outputText value="#{viajeController.viaje.fechaInicio}" id="txtZonaD"  style="margin-left: 50px; width:200px">
+                                 <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+
+                            <h:outputText value="Fecha Fin:               " />
+                            <h:outputText value="#{viajeController.viaje.fechaFin}" id="txtTipoViajeD"  style="margin-left: 50px; width:200px">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+
+                        </h:panelGrid>  
+                    </p:fieldset>
+                </div>
+            </h:form>
+        </div>
+               
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

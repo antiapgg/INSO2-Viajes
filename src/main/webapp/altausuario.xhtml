@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+
+    <h:outputStylesheet library="css" name="registro.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    <h:outputScript library="js" name="calendar_es.js" />
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <title>Area de Registro.</title>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    <h:body>
+        
+        <div align="center" class="img">
+            <img src="./resources/img/logo.png" class="avatar" alt="Avatar Image" align="center" width="100" height="100" z-index="2" position="absolute"/>
+        </div>
+        <h:form id="form">
+            
+            <p:messages id="messages" showDetail="true" >
+
+            </p:messages>
+            
+            <div class="registro-box">
+                <h1>Datos Personales: </h1>
+                <br></br>
+                <br></br>
+                <p:outputLabel for="txtNombre" value="Nombre:"/>
+                <p:inputText type="text" id="txtNombre"
+                        value="#{altaUsuarioController.persona.nombre}" 
+                        required="true" 
+                        requiredMessage="Nombre es un campo obligatorio"
+                        placeholder="Nombre" style="display: block; color: white;"
+                    />
+
+                <p:outputLabel for="txtApellidos" value="Apellidos:"/>
+                <p:inputText type="text" value="#{altaUsuarioController.persona.apellidos}" required="true"
+                             requiredMessage="Apellidos es un campo obligatorio"
+                             placeholder="Apellidos"
+                             id="txtApellidos"/>
+
+                <p:outputLabel for="txtFecha" value="Fecha de Nacimiento:"/>
+                <p:calendar value="#{altaUsuarioController.persona.fechaNacimiento}" locale="es" navigator="true"
+                            pattern="yyyy-MMM-dd" required="true" effect="explode"
+                            requiredMessage="Fecha de Nacimiento es un campo obligatorio"
+                            id="txtFecha"/>
+
+                <p:outputLabel for="txtNumTarj" value="Numero de Tarjeta:"/>
+                <p:inputMask value="#{altaUsuarioController.numTarjSt}" mask="9999 9999 9999 9999" required="true"
+                             requiredMessage="Numero de Tarjeta es un campo obligatorio"
+                             id="txtNumTarj" placeholder="Introduce tu numero de tarjeta">
+
+                    <f:validateLength minimum="16" maximum="16"/>
+                </p:inputMask>
+               
+                <p:outputLabel for="txtDni" value="DNI:"/>
+                <p:inputText type="text" value="#{altaUsuarioController.persona.DNI}" required="true"
+                             requiredMessage="DNI es un campo obligatorio"
+                             id="txtDni" placeholder="Introduce tu DNI"/>
+
+                <p:outputLabel for="txtTelefono" value="Introduce tu Telefono:"/>
+                <p:inputMask placeholder="Telefono" value="#{altaUsuarioController.telfSt}" mask="999 999 999" required="true"
+                             requiredMessage="Telefono es un campo obligatorio"
+                             id="txtTelefono">
+                    <f:validateLength minimum="9" maximum="9"/>
+                </p:inputMask>
+                <br/>
+            </div>
+        
+            <div class="registro2-box">
+                <h1>Datos de Acceso: </h1>
+                <br></br>
+                <br></br>
+                <p:outputLabel for="txtUserName" value="Nombre de usuario:"/>
+                <p:inputText type="text" value="#{altaUsuarioController.usuario.user}" required="true"
+                            requiredMessage="Nombre de Usuario es un campo obligatorio"
+                            placeholder="Nombre de Usuario"
+                            id="txtUserName"/>
+
+                <p:outputLabel for="txtCorreo" value="Correo Electronico:"/>
+                <p:inputText id="txtCorreo" value="#{altaUsuarioController.usuario.correo}" required="true" 
+                    requiredMessage="Correo Electronico es un campo obligatorio"
+                    placeholder="Correo Electronico."> 
+                   <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" /> 
+               </p:inputText>
+                
+                <p:outputLabel for="@next" value="Rol:"/>
+                <p:selectOneMenu style="outline: transparent; border:none; background: black; color:white " id="rol" 
+                                 value="#{altaUsuarioController.rol.tipoUsuario}" label="Seleccione un Rol">
+                    <f:selectItem itemLabel="Seleccione un Rol" itemValue=""/>
+                    <f:selectItems value="#{altaUsuarioController.listaNomRoles}"/>
+                </p:selectOneMenu>
+                <br/>
+                <br></br>
+                <p:outputLabel for="txtPassw" value="Password:"></p:outputLabel>
+                <p:password value="#{altaUsuarioController.usuario.password}" match="txtPassw2" required="true"
+                            requiredMessage="Password es un campo obligatorio"
+                            placeholder="Password"
+                            id="txtPassw"/>
+               
+                <p:outputLabel for="txtPassw2" value="Repita la Password:"/>
+                <p:password value="#{altaUsuarioController.usuario.password}" required="true"
+                            requiredMessage="Repetir la Password es un campo obligatorio"
+                            placeholder="Repite Password"
+                            id="txtPassw2"/>
+                
+                <br/>
+                <br></br>
+                
+                <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                        font-size: 18px; border-radius: 20px" 
+                        value="Registrar" 
+                        update="@form"
+                        action="#{altaUsuarioController.registra}"
+                        icon="pi pi-sign-in"
+                    >
+                    
+                </p:commandButton>
+   
+            
+                <br/>
+                <br></br>
+                <br/>
+                <br></br>
+            </div>
+        </h:form>    
+        
+        
+
+        <h:outputScript library="js" name="spanishLocale.js" />
+        
+    </h:body>
+</html>
+

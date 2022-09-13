@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    
+    <h:outputStylesheet library="css" name="registro.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    <h:outputScript library="js" name="calendar_es.js" />
+    
+    <h:head>
+        <title>ELIMINAR DESTINO.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+                <div class="card" style="background: url('./../../resources/img/fondo.jpeg');">
+                    <div class="p-col-12 p-md-6 p-lg-5" style="margin-left: 70px;">
+                        <div class="card" align="center">
+                        <h1 align="center" style="color:white; margin-top: 10px; padding-top: 10px">
+                            Eliminar Destino.
+                        </h1>
+                    </div>
+                        <h:form id="form">
+                            <div class="card">
+                                <p:dataTable var="destino" value="#{listarController.listaDestinos}" style="margin-bottom: 20px; margin-left: 50px; margin-right: 50px">
+                                    <p:column headerText="ID">
+                                        <h:outputText value="#{destino.idDestino}" />
+                                    </p:column>
+
+                                    <p:column headerText="Nombre">
+                                        <h:outputText value="#{destino.nombre}" /><br/>
+                                    </p:column>
+                                    
+
+                                    <p:column headerText="Precio">
+                                        <h:outputText value="#{destino.precio}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Pais">
+                                        <h:outputText value="#{destino.pais}" />
+                                    </p:column>
+                                    
+                                    <p:column>
+                                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                            font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                            value="ELIMINAR" 
+                                            action="#{destinoController.eliminar(destino)}"
+                                            update="form"
+                                            icon="pi pi-trash"
+                                        />
+                                    </p:column>
+                                    
+ 
+                                </p:dataTable>
+                            </div>
+                        </h:form>
+                    </div>
+                    <p:dialog id='dialogo' widgetVar='wdialogoeliminar' header="Eliminar " modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                        <h:form>
+                            <p:outputLabel for="txtPassw" value=""/>
+                            <p:inputText id="txtPassw" value="¿Esta seguro que desea eliminarlo?"  />
+                             <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Registrar" 
+                                    update="@form"
+                                    action="#{destinoController.eliminar()}"
+                                    icon="pi pi-check"
+                                />
+                        </h:form>
+                    </p:dialog>
+                    
+                    <h:outputScript library="js" name="spanishLocale.js" />
+                    
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

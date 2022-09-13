@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+    
+    <h:outputStylesheet library="css" name="registro.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    <h:outputScript library="js" name="calendar_es.js" />
+    
+    <h:head>
+        <title>LISTAR.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+                <div class="p-grid" style="margin-top: 10px; margin-bottom: 20px; height: 600px; background: url('./../../resources/img/fondo.jpeg');">
+                    <div class="p-col-12 p-md-6 p-lg-5"  align="center">
+                        <h:form id="tiposDeGruposForm">
+                            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                            <div class="card">
+                                <p:dataTable var="lista" 
+                                    value="#{pendientesController.listaViajes}" 
+                                    selection="#{pendientesController.viaje}"
+                                    style="margin-bottom: 30px;
+                                        margin-top: 20px;
+                                        width: 900px;"
+                                    >
+                                    
+                                    <p:column headerText="ID">
+                                        <h:outputText value="#{lista.idViajes}" />
+                                    </p:column>
+
+                                    <p:column headerText="Nombre">
+                                        <h:outputText value="#{lista.nombre}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Inicio">
+                                        <h:outputText value="#{lista.fechaInicio}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Fin">
+                                        <h:outputText value="#{lista.fechaFin}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                                    </p:column>
+
+                                    <p:column headerText="Nombre del Destino">
+                                        <h:outputText value="#{lista.destino.nombre}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                                    </p:column>
+                                    
+                                    <p:column headerText="Pais">
+                                        <h:outputText value="#{lista.destino.pais}" />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Precio">
+                                        <h:outputText value="#{lista.destino.precio}" />
+                                    </p:column>
+ 
+                                    <p:column headerText="Mas Informacion">
+                                        <p:commandButton
+                                            style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                                font-size: 18px; margin-left: 10px; border-radius: 20px; " 
+                                                icon="pi pi-plus-circle"
+                                                action="#{pendientesController.buscar(lista)}" ajax="true"
+                                            > 
+                                        </p:commandButton>
+                                    </p:column>
+                                    <p:column headerText="Confirmar Compra">
+                                        <p:commandButton
+                                            style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                                font-size: 18px; margin-left: 10px; border-radius: 20px; " 
+                                                icon="pi pi-money-bill"
+                                                update="tiposDeGruposForm"
+                                                actionListener="#{pendientesController.setViaje(lista)}"
+                                                oncomplete="PF('wdialogoPago').show();"
+                                                
+                                            > 
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <p:dialog id='dialogo2' widgetVar='wdialogoPago' header="Pago" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form id="formd2">
+                        <h:panelGrid id="grid" columns="1" cellpadding="1">
+                            <p:messages id="messages" showDetail="true" closable="true" />
+
+                            <h:outputText value="Numero de Tarjeta: "/>
+                            <p:outputLabel value="#{pendientesController.numTarjSt}"
+                                    id="txtNumT" />
+                            
+                            <h:outputText value="Fecha Caducidad: "/>
+                            <p:inputMask type="text" mask="99/99" required="true"
+                                requiredMessage="Fecha Caducidad"
+                                id="txtNumTarj" placeholder="Introduce la fecha de caducidad de tu tarjeta">
+                            </p:inputMask> 
+                            
+                            <h:outputText value="CVV: "/>
+                                <p:inputMask type="text" mask="999" required="true"
+                                requiredMessage="Campo Obligatorio"
+                                id="txtNumTar1ej" placeholder="Introduce el codigo de seguridad de tu tarjeta">
+                                <f:validateLength minimum="3" maximum="3"/>
+                            </p:inputMask> 
+
+                             <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Comprar" 
+                                icon="pi pi-check"
+                                update='formd2'
+                                action="#{pendientesController.confirmar(pendientesController.viaje)}"
+                                 />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      >
+
+    <h:outputStylesheet library="css" name="registro.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    <h:outputScript library="js" name="calendar_es.js" />
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+                <div class="card" style="background: url('./../../resources/img/fondo.jpeg');">
+                    <div class="card" align="center">
+                        <h1 align="center" style="color:white; margin-top: 10px; padding-top: 10px">
+                            Modificar Administrador.
+                        </h1>
+                    </div>
+                <h:form id="form">
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+
+
+                    <p:fieldset legend="Datos Personales" toggleable="true" style="width: 600px; margin-left: 370px;">
+                        <h:panelGrid id="pgPersonales" columns="3" styleClass="ui-noborder" cellpadding="3" >                   
+                            <h:outputText value="Nombre:               " />
+                            <h:outputText value="#{usuarioController.persona.nombre}     " id="txtNombre"  style="margin-left: 50px; width:200px"/>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                value="Editar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoNombre').show();"
+                                icon="pi pi-check"
+                            />
+
+                            <p:outputLabel for="txtApellidos" value="Apellidos:          "/>
+                            <p:outputLabel value="#{usuarioController.persona.apellidos}" id="txtApellidos"  style="margin-left: 50px; width:200px"/>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                value="Editar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoApellidos').show();"
+                                icon="pi pi-check"
+                            />
+
+                            <p:outputLabel value="Fecha de Nacimiento: "/>
+                            <h:outputText value="#{usuarioController.persona.fechaNacimiento}"  style='margin-left: 50px;'> 
+                                 <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                            <br/>
+                            
+                            <p:outputLabel for="txtNumTarj" value="Numero de Tarjeta:"/>
+                            <h:outputText value="#{usuarioController.numTarjSt}" id="txtNumTarj" style="margin-left: 50px;"/>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                value="Editar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoNumTarj').show();"
+                                icon="pi pi-check"
+                            />
+                            
+                            <p:outputLabel value="DNI:"/>
+                            <h:outputText value="#{usuarioController.persona.DNI}" style='margin-left: 50px;'/>
+                            <br/>
+                            
+                            <p:outputLabel for="txtTelefono" value="Telefono:"/>
+                            <p:outputLabel value="#{usuarioController.telfSt}" id="txtTelefono" style="margin-left: 50px;"/>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; margin-left: 50px; border-radius: 20px" 
+                                value="Editar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoTelf').show();"
+                                icon="pi pi-check"
+                            />                          
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                    <p:fieldset legend="Datos de Acceso" toggleable="true" style="margin-top: 30px;  width: 600px; margin-left: 370px;" >
+                        <h:panelGrid id="pgAcceso" columns="3" styleClass="ui-noborder" cellpadding="3"> 
+
+                            <p:outputLabel for="txtUser" value="Nombre de usuario: "/>
+                            <p:outputLabel value="#{usuarioController.usuario.user}" id="txtUser" style='margin-left: 50px;'/>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px; margin-left: 50px; margin-right: 5px; float: right;" 
+                                value="Editar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoUser').show();"
+                                icon="pi pi-check"
+                            />
+                            
+                            <p:outputLabel for="txtCorreo" value="Correo Electronico:" />
+                            <p:outputLabel id="txtCorreo" value="#{usuarioController.usuario.correo}" style='margin-left: 50px;'> 
+                            </p:outputLabel> 
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px; margin-left: 50px;" 
+                                value="Editar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoCorreo').show();"
+                                icon="pi pi-check"
+                            />
+                            
+                            <p:outputLabel for="txtPassw" value="Password:" />
+                            <p:outputLabel value="******" id="txtPassw" style='margin-left: 50px;'/>
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px; margin-left: 50px;" 
+                                value="Editar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoPassw').show();"
+                                icon="pi pi-check"
+                            />
+                            
+                            <p:outputLabel value="#{usuarioController.persona.numTarjeta}"/>
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                </h:form> 
+                </div>
+                
+                <p:dialog id='dialogo' widgetVar='wdialogoTelf' header="Nuevo Telefono" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="grid1" columns="3" styleClass="ui-noborder" cellpadding="3">
+                            <p:outputLabel for="txtTelefono" value="Numero de Telefono:"/>
+                            <p:inputMask value="#{usuarioController.telfSt}" mask="999 999 999" required="true"
+                                         requiredMessage="Telefono es un campo obligatorio"
+                                         id="txtTelefono" placeholder="Introduce tu numero de telefono">
+                                <f:validateLength minimum="9" maximum="9"/>
+                            </p:inputMask>
+                            <p:message for="@previous"/>
+                        
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Registrar" 
+                                update="form"
+                                action="#{usuarioController.modificarTelf()}"
+                                oncomplete="PF('wdialogoTelf').hide();"
+                                icon="pi pi-check"
+                            />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+                <p:dialog id='dialogo2' widgetVar='wdialogoNombre' header="Nuevo Nombre" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="grid2" columns="3" styleClass="ui-noborder" cellpadding="3">
+                            <p:outputLabel for="txtNombre" value="Nombre:"/>
+                            <p:inputMask value="#{usuarioController.persona.nombre}" required="true"
+                                         requiredMessage="Nombre es un campo obligatorio"
+                                         id="txtNombre" placeholder="Introduce tu nombre">
+                            </p:inputMask>
+                            <p:message for="@previous"/>
+                        
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Registrar" 
+                                action="#{usuarioController.modificarNombre()}"
+                                oncomplete="PF('wdialogoNombre').hide();"
+                                update='form'
+                                icon="pi pi-check"
+                            />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+                <p:dialog id='dialogo3' widgetVar='wdialogoApellidos' header="Nuevos Apellidos" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="grid3" columns="3" styleClass="ui-noborder" cellpadding="3">
+                            <p:outputLabel for="txtApellidos" value="Apellidos:"/>
+                            <p:inputMask value="#{usuarioController.persona.apellidos}" required="true"
+                                         requiredMessage="Apellidos es un campo obligatorio"
+                                         id="txtApellidos" placeholder="Introduce tus apellidos">
+                            </p:inputMask>
+                            <p:message for="@previous"/>
+                            
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Registrar" 
+                                update="@form"
+                                action="#{usuarioController.registra}"
+                                icon="pi pi-check"
+                            />
+                        </h:panelGrid>>
+                    </h:form>
+                </p:dialog>
+                
+                <p:dialog id='dialogo4' widgetVar='wdialogoNumTarj' header="Nuevo Numero de Tarjeta" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="grid4" columns="3" styleClass="ui-noborder" cellpadding="3">
+                            <p:outputLabel for="txtNumTarj" value="Numero de Tarjeta:"/>
+                            <p:inputMask value="#{altaUsuarioController.numTarjSt}" mask="9999 9999 9999 9999" required="true"
+                                 requiredMessage="Numero de Tarjeta es un campo obligatorio"
+                                 id="txtNumTarj" placeholder="Introduce tu nuevo numero de tarjeta">
+                                <f:validateLength minimum="16" maximum="16"/>
+                            </p:inputMask>
+                            <p:message for="@previous"/>
+                            
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Registrar" 
+                                update="@form"
+                                action="#{usuarioController.modificarNum()}"
+                                icon="pi pi-check"
+                            />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+                <p:dialog id='dialogo5' widgetVar='wdialogoUser' header="Nuevo Nombre de Usuario" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="grid5" columns="3" styleClass="ui-noborder" cellpadding="3">
+                            <p:outputLabel for="txtUser" value="Nombre de Usuario:"/>
+                            <p:inputMask value="#{usuarioController.usuario.user}" required="true"
+                                         requiredMessage="Nombre de usuario es un campo obligatorio"
+                                         id="txtUser" placeholder="Nombre de Usuario">
+                            </p:inputMask>
+                            <p:message for="@previous"/>
+                            
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Registrar" 
+                                update="@form"
+                                action="#{usuarioController.registra}"
+                                icon="pi pi-check"
+                            />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+                <p:dialog id='dialogo6' widgetVar='wdialogoCorreo' header="Nuevo Correo" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="grid6" columns="3" styleClass="ui-noborder" cellpadding="3"> 
+                            <p:outputLabel for="txtCorreo" value="Correo:"/>                         
+                            <p:inputText id="txtCorreo" value="#{usuarioController.usuario.correo}" 
+                                         requiredMessage="Correo Electronico es un campo obligatorio"
+                                         required="true" placeholder="Introduce el nuevo correo."> 
+                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" /> 
+                            </p:inputText> 
+                            <p:message for="@previous"/>
+                            
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                    font-size: 18px; border-radius: 20px" 
+                                    value="Registrar" 
+                                    update="@form"
+                                    action="#{usuarioController.registra}"
+                                    icon="pi pi-check"
+                                />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+                <p:dialog id='dialogo7' widgetVar='wdialogoPassw' header="Nueva Password" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <h:panelGrid id="NuevaPassword" columns="3" styleClass="ui-noborder" cellpadding="3"> 
+                            <p:outputLabel for="txtPassw" value="Password:"/>
+                            <p:password value="#{usuarioController.usuario.password}" required="true" match="txtPassw2"
+                                        requiredMessage="Password es un campo obligatorio"
+                                        placeholder="Password" id="txtPassw" >
+                            </p:password>
+                            <p:message for="@previous"/>
+                        
+                            <p:outputLabel for="txtPassw2" value="Repita la Password:"/>
+                            <p:password value="#{usuarioController.usuario.password}" required="true"
+                                requiredMessage="Repetir la Password es un campo obligatorio"
+                                placeholder="Repite Password"
+                                id="txtPassw2"/>
+                            <p:message for="@previous"/>
+                            
+                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Mostrar" 
+                                update="@form"
+                                oncomplete="PF('wdialogoPasswShow').show();"
+                                icon="pi pi-check"
+                            />
+                        <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Registrar" 
+                                update="@form"
+                                action="#{usuarioController.registra}"
+                                icon="pi pi-check"
+                            />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+                <p:dialog id='dialogo8' widgetVar='wdialogoPasswShow' header="Mostrar Password" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form>
+                        <p:outputLabel for="txtPassw" value="Password:"/>
+                        <p:outputLabel id="txtPassw" value="#{usuarioController.usuario.password}"  />
+                    </h:form>
+                </p:dialog>
+                
+                <h:outputScript library="js" name="spanishLocale.js" />
+            </ui:define>
+         </ui:composition>
+    </h:body>
+</html>

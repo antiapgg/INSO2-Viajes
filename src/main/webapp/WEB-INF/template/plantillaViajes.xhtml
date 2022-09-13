@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:outputStylesheet library="css" name="default.css"/>
+    <h:outputStylesheet library="css" name="cssLayout.css"/>
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Facelets Template</title>
+        <f:event type="preRenderView" listener="#{plantillaController.verificarYMostrar()}"/>
+        <link rel="stylesheet" href="css/default.css"></link>
+    </h:head>
+
+    <h:body style="background: rgba(169, 242, 255, 0.0)">
+        <!-- TOP -->
+        <div style="background: #5BDCF3" id="top">
+             <ui:insert name="top">
+                <h:form>
+                    <p:menubar model="#{menusController.model}" style="mousehover:#CCF575; hover: #CCF575; background-color: #5BDCF3;">
+                        <f:facet name="options"> 
+
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                             font-size: 18px; border-radius: 20px" icon="pi pi-sign-out" value="Cerrar Sesión" 
+                                             actionListener="#{menusController.cerrarSesion()}" action="/index?faces-redirect=true"/>
+                            
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </ui:insert>
+        </div>
+        
+        <!-- CONTENT -->
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        
+        <!-- BOTTOM   <h1 style=" margin-left: 10px; font:100% sans-serif; background: #5BDCF3; color:white">Contact us!</h1>-->
+        <div id="bottom" >
+            <ui:insert name="bottom">
+               <!-- <div class="card" style="text-align: left; background-color: white">
+                    <p:divider align="center" type="dashed" style="color: #5BDCF3; background-color: white; marging-bottom:0px">
+                        <h1>Contact us!</h1>
+                    </p:divider>
+                    <div style="float: left; margin-left: 10px; margin-bottom: 50px; color: #5BDCF3"><i class="pi pi-github" style="font-size: 2rem"></i></div><!- - comment - ->
+                    <div style="margin-left: 60px; margin-bottom: 50px; color: #5BDCF3"><i class="pi pi-facebook" style="font-size: 2rem"></i></div>
+   
+                         <!- -<div style="margin-bottom: 20px; margin-left: 10px;"><i class="pi pi-home" style="font-size: 2rem"></i><p:outputLabel value="León" style=" margin-left: 10px; font:100% sans-serif;" /></div>
+                    <div style="margin-bottom: 50px; margin-left: 10px;"><i class="pi pi-phone" style="font-size: 2rem"></i><p:outputLabel value="XXX XXX XXX" style=" margin-left: 10px; font:100% sans-serif;" /></div>
+               - ->
+                </div>-->
+               <div class="card" style="text-align: left;">
+            <p:divider align="center" type="dashed" style="color: white; background-color: darkgray; marging-bottom:0px; text-decoration: none">
+               <!-- <h1 style="color:white">Contact us!</h1> -->
+            </p:divider>
+                   <h1 style="color:white;" align="center">Contact us!</h1>
+            <div style="float: left; margin-left: 10px; margin-bottom: 20px; color: white"><i class="pi pi-github" style="font-size: 2rem"></i></div><!-- comment -->
+            <div style="margin-left: 60px; margin-bottom: 20px; color: white"><i class="pi pi-facebook" style="font-size: 2rem"></i></div>
+            <!--<div style="margin-bottom: 20px; margin-left: 10px;"><i class="pi pi-home" style="font-size: 2rem"></i><p:outputLabel value="León" style=" margin-left: 10px; font:100% sans-serif;" /></div>
+            <div style="margin-bottom: 50px; margin-left: 10px;"><i class="pi pi-phone" style="font-size: 2rem"></i><p:outputLabel value="XXX XXX XXX" style=" margin-left: 10px; font:100% sans-serif;" /></div>
+       -->
+        </div>
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

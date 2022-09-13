@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:outputStylesheet name="css/barra.css"/>
+    <h:outputStylesheet name="css/default.css"/>
+    
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <title>Bienvenido a tu Agencia de Viajes Online.</title>
+        <link rel="stylesheet" href="css/barra.css"></link>
+        <link rel="stylesheet" href="css/default.css"></link>
+    </h:head>
+    <h:body>
+        <header>
+            <div class="ancho" >
+                <div class="logo" style="responsive:true" styleClass="div-responsive">
+                    <h:graphicImage name="/img/logo.png" height="80px" width="80px" styleClass="img-rounded img-responsive"/>
+                    <div class="texto" style="responsive:true">
+                    <h1 style="color:white; responsive: true">Descubre, Explora, Disfruta.</h1>
+                        <!--
+                        <img src="./resources/img/logo.png" class="avatar" alt="Avatar Image" href="index.xhtml"/>
+                    -->
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <h:form>
+                        <li>
+                            <h:link outcome="/altausuario?faces-redirect=true"> Registrarse </h:link>
+                        </li>
+                        <li>
+                            <h:link outcome="/login?faces-redirect=true"> Iniciar Sesión </h:link>
+                        </li>
+                        </h:form>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+            <div class="card" align="center" style="height: 600px"> <!--  style="background: url('resources/img/fondo.jpeg')" -->
+                <p:galleria value="#{imagesView.images}" var="image" panelWidth="800" panelHeight="500" showCaption="true" styleClass="img-rounded img-responsive" style="margin-top: 10px">
+                <p:graphicImage name="/img/viajes/#{image}" styleClass="img-rounded img-responsive" style="width: 800px; height: 500px; margin-top: 10px"
+                                title="Disfruta de nuestros viajes"/><!-- alt="Image Description for #{image}"
+                                title="#{image}"/> -->
+            </p:galleria>
+        </div>
+        
+        <div class="card" style="text-align: left; background-color: white; height:100px;">
+            <p:divider align="center" type="dashed" style="color: #5BDCF3; background-color: white; marging-bottom:0px">
+                <h1>Contact us!</h1>
+            </p:divider>
+            <div style="float: left; margin-left: 10px;  color: #5BDCF3"><i class="pi pi-github" style="font-size: 2rem"></i></div><!-- comment -->
+            <div style="margin-left: 60px; color: #5BDCF3"><i class="pi pi-facebook" style="font-size: 2rem"></i></div>
+            <!--<div style="margin-bottom: 20px; margin-left: 10px;"><i class="pi pi-home" style="font-size: 2rem"></i><p:outputLabel value="León" style=" margin-left: 10px; font:100% sans-serif;" /></div>
+            <div style="margin-bottom: 50px; margin-left: 10px;"><i class="pi pi-phone" style="font-size: 2rem"></i><p:outputLabel value="XXX XXX XXX" style=" margin-left: 10px; font:100% sans-serif;" /></div>
+       -->
+        </div>
+     
+        
+    </h:body>
+</html>

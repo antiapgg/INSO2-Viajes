@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   <h:head>
+        <title>MOSTRAR.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+        <link rel="stylesheet" href="resources/css/registro.css"></link>
+    </h:head>
+    
+    <h:body>
+        <ui:composition template="./../../WEB-INF/template/plantillaViajes.xhtml">
+            <ui:define name="content">
+            <div class="card" style="background: url('./../../resources/img/fondo.jpeg');">
+             <h:form id="form">
+                 <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                <div align="center">
+                    <p:graphicImage url="#{showDestinoController.destino.url}" width="600" height="300" alt="descripcion" />
+                </div>
+                <div align="center">
+                    <p:fieldset legend="Informacion" toggleable="true" style="width: 600px;">
+                        <h:panelGrid columns="2" rendered="#{showDestinoController.destino != null}">
+                            <h:outputText value="Nombre:               " />
+                            <h:outputText value="#{showDestinoController.destino.nombre}" id="txtNombreD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Pais:               " />
+                            <h:outputText value="#{showDestinoController.destino.pais}" id="txtPaisD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Precio:               " />
+                            <h:outputText value="#{showDestinoController.destino.precio}" id="txtPrecioD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Zona:               " />
+                            <h:outputText value="#{showDestinoController.destino.zona.nombre}" id="txtZonaD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Tipo de Viaje:       " />
+                            <h:outputText value="#{showDestinoController.destino.tipoViaje.nombre}" id="txtTipoViajeD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Actividades:       " />
+                            <h:outputText value="#{showDestinoController.destino.tipoViaje.actividades}" id="txtActividadesD"  style="margin-left: 50px; width:200px"/>
+
+                            <h:outputText value="Grupos Recomendados:       " />
+                            <h:outputText value="#{showDestinoController.destino.grupos.nombre}" id="txtGruposD"  style="margin-left: 50px; width:200px"/>
+
+                            <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Seleccionar Fechas" 
+                                update='@form'
+                                oncomplete="PF('wdialogoNombre').show();"
+                                icon="pi pi-check"/>
+                        </h:panelGrid>  
+                    </p:fieldset>
+                </div>
+            </h:form>
+        </div>
+                <p:dialog id='dialogo1' widgetVar='wdialogoNombre' 
+                          header="Validar Fechas" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="true"  
+                          position="center center"
+                          style="background: #5BDCF3; color: #fff; width: 350px; height: 350px;">
+                    <h:form id="formd1" onsubmit="PF('wdialogoNombre').hide(); PF('wdialogoPago').show();">
+
+                        <h:panelGrid id="grid" columns="1" cellpadding="1">
+                            <p:messages id="messages" showDetail="true" closable="true" />
+
+                            <h:outputText value="Nombre del Viaje: "/>
+                            <p:inputText type="text" value="#{showDestinoController.nombreViaje}" required="true"
+                                    requiredMessage="Nombre es un campo obligatorio"
+                                    id="txtNombre" placeholder="Introduce el nombre del viaje"></p:inputText>
+                                          
+                            <p:outputLabel for="fechaInicio" value="Fecha Inicio" />
+                             <p:calendar id="fechaInicio" value="#{showDestinoController.fechaInicio}" showOn="button" />    
+
+                             <p:outputLabel for="fechaFin" value="Fecha Fin" />
+                             <p:calendar id="fechaFin" value="#{showDestinoController.fechaFinal}" showOn="button" />    
+
+                             <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Reservar Viaje"  
+                                icon="pi pi-check"
+                                actionListener="#{showDestinoController.validarFechas}" 
+                                update='formd1'
+                                />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+                
+                 <p:dialog id='dialogo2' widgetVar='wdialogoPago' header="Pago" modal="true" resizable="false" 
+                          closeOnEscape="true" draggable="false" style="background: #5BDCF3; color: #fff;">
+                    <h:form id="formd2">
+                        <h:panelGrid id="grid" columns="1" cellpadding="1">
+                            <p:messages id="messages" showDetail="true" closable="true" />
+
+                            <h:outputText value="Numero de Tarjeta: "/>
+                            <p:outputLabel value="#{showDestinoController.numTarjSt}"
+                                    id="txtNumT" />
+                            
+                            <h:outputText value="Fecha Caducidad: "/>
+                            <p:inputMask type="text" mask="99/99" required="true"
+                                requiredMessage="Fecha Caducidad"
+                                id="txtNumTarj" placeholder="Introduce la fecha de caducidad de tu tarjeta">
+                            </p:inputMask> 
+                            
+                            <h:outputText value="CVV: "/>
+                                <p:inputMask type="text" mask="999" required="true"
+                                requiredMessage="Campo Obligatorio"
+                                id="txtNumTar1ej" placeholder="Introduce el codigo de seguridad de tu tarjeta">
+                                <f:validateLength minimum="3" maximum="3"/>
+                            </p:inputMask> 
+
+                             <p:commandButton style="border:none; outline:none; height: 40px; background: #5BDCF3; color: #fff; 
+                                font-size: 18px; border-radius: 20px" 
+                                value="Comprar" 
+                                icon="pi pi-check"
+                                action="#{showDestinoController.validarVenta()}"
+                                update='formd2' />
+                        </h:panelGrid>
+                    </h:form>
+                </p:dialog>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
